@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TezPrint Team</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark" style="background: var(--glass); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);">
+      <a class="navbar-brand d-flex align-items-center" href="Main page.html">
+        <img src="/pictures/logo.png" alt="Logo" style="height:40px; margin-right:10px;">
+        <span>TezPrint</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
+          <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+        </ul>
+        <button id="themeToggle" class="theme-btn">Change Mode</button>
+      </div>
+    </nav>
+        <button id="logoutBtn">Logout</button>
+    <script>
+      const token = localStorage.getItem("token");
+      if (!token) {
+        window.location.href = "login.html";
+      }
+    </script>
+
+    <script>
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      });
+    </script>
+  </header>
+
+  <div class="container">
+    <div class="header-bar">Meet our team</div>
+      <main class="main text-center">
+        <h2>Our Team</h2>
+      <p>Click on an image to learn more about each team member.</p>
+
+      <section class="team-grid mt-4">
+        <div class="team-card">
+          <div class="team-photo-wrap">
+            <img src="/pictures/NURDAULET-TEZPRINT.png" alt="Member 1" class="team-photo">
+            <div class="team-info">Nurdaulet — Lead Designer with 5+ years of experience in branding and printing design.</div>
+          </div>
+          <h4 class="team-name">Nurdaulet</h4>
+          <p class="team-role">Owner of polygraphy</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-photo-wrap">
+            <img src="/pictures/almas.jpg" alt="Member 2" class="team-photo">
+            <div class="team-info">Almas — Project Manager ensuring smooth communication and timely delivery.</div>
+          </div>
+          <h4 class="team-name">Almas</h4>
+          <p class="team-role">Main manufacturer</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-photo-wrap">
+            <img src="/pictures/я в чатгпт.jpg" alt="Member 3" class="team-photo">
+            <div class="team-info">Tamirlan — Printing Engineer specializing in eco-friendly materials and color accuracy.</div>
+          </div>
+          <h4 class="team-name">Tamirlan</h4>
+          <p class="team-role">Manager</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-photo-wrap">
+            <img src="/pictures/жанбек.jpeg" alt="Member 4" class="team-photo">
+            <div class="team-info">Zhanbek — Marketing Specialist responsible for visual identity and client relations.</div>
+          </div>
+          <h4 class="team-name">Zhanbek</h4>
+          <p class="team-role">Manager</p>
+        </div>
+      </section>
+        <div class="image-popup" id="popup">
+            <span class="close">&times;</span>
+            <img id="popupImg" src="" alt="Enlarged Team Member">
+            <div id="popupText" class="popup-caption"></div>
+        </div>
+
+      </main>
+    </section>
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p>© 2025 <b>TezPrint</b>. All rights reserved.</p>
+        <div class="footer-links">
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Terms</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script3.js"></script>
+  <script src="theme.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Main Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style1.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark" style="background: var(--glass); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);">
+      <a class="navbar-brand d-flex align-items-center" href="Main page.html">
+        <img src="/pictures/logo.png" alt="Logo" style="height:40px; margin-right:10px;">
+        <span>TezPrint</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
+          <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">Sign in</a></li>
+        </ul>
+        <button id="themeToggle" class="theme-toggle-btn">Change Mode</button>
+      </div>
+    </nav>
+    <script>
+      const token = localStorage.getItem("token");
+      if (!token) {
+        window.location.href = "login.html";
+      }
+    </script>
+
+    <script>
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      });
+    </script>
+
+  </header>
+
+
+  <div class="container">
+    <div class="header-bar">About us</div>
+    <section class="two-col">
+      <aside class="sidebar">
+        <nav class="side-menu">
+          <h3 class="side-title">Parts</h3>
+          <ul>
+            <li><a href = "products.html">Products</a></li>
+            <li><a href = "team.html">Team</a></li>
+            <li><a href = "order.html">Order</a></li>
+            <li><a href = "contact.html">Contact us</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="main" align="center">
+        <h3>The TezPrint Polygraphy</h3>
+        <p>
+         The company <b>TezPrint</b> is a modern printing house specializing in
+         high-quality printing of all types of products: business cards, brochures,
+         magazines, packaging, and banners. We offer individual solutions
+         for businesses, using the latest printing technologies and eco-friendly materials.
+
+         Our mission is to help clients express their ideas vividly and professionally.
+         We value quality, precision, and speed in completing every order.
+        <br><br>
+        <b>If it can be imagined, it can be printed.</b>
+        </p>
+      </main>
+
+    </section>
+
+    <section class="gallery">
+      <figure class="g-item">
+        <img src="/pictures/gal.jpg" alt="Gallery 1" class="img-fluid">
+        <figcaption class="g-caption">T-shirt print</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/pictures/gall.jpg" alt="Gallery 2" class="img-fluid">
+        <figcaption class="g-caption">Booklet</figcaption>
+      </figure>
+      <figure class="g-item">
+        <img src="/pictures/galle.jpg" alt="Gallery 3" class="img-fluid">
+        <figcaption class="g-caption">Bussiness card</figcaption>
+      </figure>
+    </section>
+  <button id="logoutBtn" class="theme-toggle-btn">Logout</button>
+
+  </div>
+
+    
+  <footer class="site-footer">
+      <div class="footer-content">
+        <p>© 2025 <b>TezPrint</b>. All rights reserved.</p>
+        <div class="footer-links">
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Terms</a>
+        </div>
+      </div>
+    </footer>
+
+  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content bg-dark text-center">
+        <div class="modal-body p-0">
+          <img id="modalImage" src="" class="img-fluid rounded" alt="Selected image">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script1.js"></script>
+  <script src="theme.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const token = localStorage.getItem("token");
+    const signLink = document.querySelector("a[href='login.html']");
+    const navbar = document.querySelector(".navbar-nav");
+
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+
+        // Удаляем кнопку Sign in
+        if (signLink) signLink.parentElement.remove();
+
+        // Добавляем Dashboard
+        const dashboardLi = document.createElement("li");
+        dashboardLi.className = "nav-item";
+
+        const dashboardLink = document.createElement("a");
+        dashboardLink.className = "nav-link";
+        dashboardLink.href = "dashboard.html";
+        dashboardLink.textContent = "Dashboard";
+
+        dashboardLi.appendChild(dashboardLink);
+        navbar.appendChild(dashboardLi);
+
+        // Добавляем Logout
+        const logoutLi = document.createElement("li");
+        logoutLi.className = "nav-item";
+
+        const logoutLink = document.createElement("a");
+        logoutLink.className = "nav-link";
+        logoutLink.href = "#";
+        logoutLink.textContent = "Logout";
+
+        logoutLink.addEventListener("click", function () {
+          localStorage.removeItem("token");
+          window.location.reload();
+        });
+
+        logoutLi.appendChild(logoutLink);
+        navbar.appendChild(logoutLi);
+
+      } catch (err) {
+        console.error("Invalid token");
+        localStorage.removeItem("token");
+      }
+    }
+
+  });
+  </script>
+
+</body>
+</html>

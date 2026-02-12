@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TezPrint Order</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style5.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark" style="background: var(--glass); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);">
+      <a class="navbar-brand d-flex align-items-center" href="Main page.html">
+        <img src="/pictures/logo.png" alt="Logo" style="height:40px; margin-right:10px;">
+        <span>TezPrint</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
+          <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html"> Sign in</a></li>
+        </ul>
+        <button id="themeToggle" class="theme-btn">Change Mode</button>
+      </div>
+    </nav>
+        <button id="logoutBtn">Logout</button>
+    <script>
+      const token = localStorage.getItem("token");
+      if (!token) {
+        window.location.href = "login.html";
+      }
+    </script>
+
+    <script>
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      });
+    </script>
+  </header>
+
+  <div class="container">
+    <div class="order-form">
+      <h2>Make an Order</h2>
+      <p>Fill out the form to place your printing order.</p>
+
+      <form id="orderForm">
+        <label>Full Name</label>
+        <input type="text" id="name" placeholder="Your name" required>
+
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="+7 777 000 00 00" required>
+
+        <label>Order Type</label>
+        <select id="type" required>
+          <option value="">Select product...</option>
+          <option value="T-shirt print">T-shirt print</option>
+          <option value="Booklet">Booklet</option>
+          <option value="Business Card">Business Card</option>
+        </select>
+
+        <label>Deadline</label>
+        <input type="date" id="deadline" required>
+
+        <label>Upload Your Design</label>
+        <input type="file" id="design" accept="image/*,.pdf">
+
+        <button type="submit" id="submitOrder">Submit Order</button>
+        <div id="orderResponse"></div>
+      </form>
+    </div>
+  </div>
+
+      <div id="orderResponse" class="response"></div>
+    </section>
+  </main> 
+
+  <br>
+  <br>
+  <br>
+  <br>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p>© 2025 <b>TezPrint</b>. All rights reserved.</p>
+        <div class="footer-links">
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Terms</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script5.js"></script>
+  <script src="theme.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const token = localStorage.getItem("token");
+    const signLink = document.querySelector("a[href='login.html']");
+    const navbar = document.querySelector(".navbar-nav");
+
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+
+        // Удаляем кнопку Sign in
+        if (signLink) signLink.parentElement.remove();
+
+        // Добавляем Dashboard
+        const dashboardLi = document.createElement("li");
+        dashboardLi.className = "nav-item";
+
+        const dashboardLink = document.createElement("a");
+        dashboardLink.className = "nav-link";
+        dashboardLink.href = "dashboard.html";
+        dashboardLink.textContent = "Dashboard";
+
+        dashboardLi.appendChild(dashboardLink);
+        navbar.appendChild(dashboardLi);
+
+        // Добавляем Logout
+        const logoutLi = document.createElement("li");
+        logoutLi.className = "nav-item";
+
+        const logoutLink = document.createElement("a");
+        logoutLink.className = "nav-link";
+        logoutLink.href = "#";
+        logoutLink.textContent = "Logout";
+
+        logoutLink.addEventListener("click", function () {
+          localStorage.removeItem("token");
+          window.location.reload();
+        });
+
+        logoutLi.appendChild(logoutLink);
+        navbar.appendChild(logoutLi);
+
+      } catch (err) {
+        console.error("Invalid token");
+        localStorage.removeItem("token");
+      }
+    }
+
+  });
+  </script>
+
+</body>
+</html>
