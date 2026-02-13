@@ -8,7 +8,12 @@ const authRoutes = require("./routes/auth.routes");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5500",
+    ""https://front-tezprint.netlify.app""
+  ]
+}));
 app.use(express.json());
 
 app.get("/health", (req, res) => res.json({ ok: true }));
