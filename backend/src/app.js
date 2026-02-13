@@ -11,7 +11,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5500",
-    ""https://front-tezprint.netlify.app""
+    "https://front-tezprint.netlify.app"
   ]
 }));
 app.use(express.json());
