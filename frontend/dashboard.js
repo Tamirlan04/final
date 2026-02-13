@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://final-k9uk.onrender.com";
 const token = localStorage.getItem("token");
 
 // если не авторизован → обратно на login
